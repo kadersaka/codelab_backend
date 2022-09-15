@@ -1,5 +1,5 @@
-from django.urls import include, path
-from django.conf.urls import url
+from django.urls import include, path , re_path as url
+# from django.conf.urls import url
 from . import views
 from .views import UserDetailsView, AllUsersView
 from rest_framework import routers
