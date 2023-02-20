@@ -40,6 +40,7 @@ class CustomUserDetailsSerializer(serializers.ModelSerializer):
             'groups',
             'is_active',
             'whatsapp_number',
+            'balance',
             # 'is_fc',
             # "fc_id",
             # 'fcm_token'

@@ -5,8 +5,8 @@ from rest_framework import filters
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from pal.models import PalTransaction, Room
-from pal.serializers import PalTransactionSerializer
+from pal.models import PalTransaction, Room, Network
+from pal.serializers import PalTransactionSerializer, NetworkSerializer
 from django.shortcuts import render, reverse, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.csrf import csrf_protect
@@ -51,6 +51,20 @@ class PalTransactionList(generics.ListCreateAPIView):
         return render(request, 'room.html', {
             "room": room,
         })
+
+
+class NetworkList(generics.ListCreateAPIView):
+    # queryset = models.CampaignItemGroup.objects.all()
+    serializer_class = NetworkSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        # serializer.save(campaign=self.request.campaign_id)
+        serializer.save(created_by=self.request.user, )
+
+    def get_queryset(self):
+        objs = Network.objects.filter(enabled=True)
+        return objs
 
 
 class PalTransactionDetail(generics.RetrieveUpdateDestroyAPIView,):

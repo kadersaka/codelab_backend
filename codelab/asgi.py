@@ -15,6 +15,14 @@ from channels.security.websocket import AllowedHostsOriginValidator
 from django.core.asgi import get_asgi_application
 
 import pal.routing
+from pal import routing
+# from pal.middlewares import WebSocketJWTAuthMiddleware
+from pal.middleware_test import JwtAuthMiddlewareStack, TokenAuthMiddleware
+
+"""
+This routinng filee is not use, the  used one is codelab.routing
+
+"""
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'codelab.settings')
 
@@ -25,16 +33,16 @@ application = ProtocolTypeRouter({
   "http": django_asgi_app,
     # "websocket": URLRouter(pal.routing.websocket_urlpatterns),
 
-    "websocket": JwtAuthMiddlewareStack(
-        URLRouter(
-            routing.websocket_urlpatterns
-        )
-    ),
-    # "websocket": AllowedHostsOriginValidator(
-    #     AuthMiddlewareStack(
-    #         URLRouter(
-    #             pal.routing.websocket_urlpatterns
-    #         )
+    # "websocket": WebSocketJWTAuthMiddleware(
+    #     URLRouter(
+    #         routing.websocket_urlpatterns
     #     )
     # ),
+
+  "websocket": TokenAuthMiddleware(
+    URLRouter(
+      routing.websocket_urlpatterns
+    )
+  ),
+
 })

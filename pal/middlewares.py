@@ -18,7 +18,6 @@ def get_user(user_id):
 
 
 class WebSocketJWTAuthMiddleware:
-
     def __init__(self, app):
         self.app = app
 
@@ -32,8 +31,11 @@ class WebSocketJWTAuthMiddleware:
         except TokenError:
             scope["user"] = AnonymousUser()
 
+        print("-----------------------------------scope")
         print(scope)
+        print("-----------------------------------receive")
         print(receive)
+        print("-----------------------------------send")
         print(send)
 
         return await self.app(scope, receive, send)

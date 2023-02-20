@@ -1,7 +1,7 @@
 from django.urls import path, re_path
 
 from pal import consumers
-from pal.views import PalTransactionDetail, PalTransactionList, PalTransactionNew, index, room
+from pal.views import PalTransactionDetail, PalTransactionList, PalTransactionNew, index, room, NetworkList
 
 app_name = 'pal'
 
@@ -12,5 +12,6 @@ urlpatterns = [
     path('newtransaction', PalTransactionNew.as_view(), name='newtransaction'),
     path('paltransactions', PalTransactionList.as_view(), name='paltransactionlist'),
     path('paltransactions/<int:pk>', PalTransactionDetail.as_view(), name='paltransactionsdetail'),
+    path('networkList', NetworkList.as_view(), name='networkList'),
 
 ]
