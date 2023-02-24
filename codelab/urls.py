@@ -18,6 +18,8 @@ urlpatterns = [
     # password reset
     path('rest-auth/password/reset/confirm/<slug:uidb64>/<slug:token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('admin/', admin.site.urls, ),
+    path('codelabapi/',include('codelab_api.urls')),
+
     url('auth/', include('dj_rest_auth.urls')),
     # path('', include('blog.urls')),
     path('', include('authentication.urls')),
