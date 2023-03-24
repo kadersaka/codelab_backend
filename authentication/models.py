@@ -1,4 +1,6 @@
 # models.py in the users Django app
+import uuid
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser, PermissionsMixin, BaseUserManager
 
@@ -8,12 +10,6 @@ GENDER_SELECTION = [
     ('F', 'Female'),
     ('NS', 'Not Specified'),
 ]
-
-# ACCOUNT_TYPES = [
-#     ('M', 'Male'),
-#     ('F', 'Female'),
-#     ('NS', 'Not Specified'),
-# ]
 
 
 class CustomUser(AbstractUser):
